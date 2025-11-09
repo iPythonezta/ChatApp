@@ -35,7 +35,8 @@ export default function Login() {
                 toast.success("Login successful");
                 localStorage.setItem('loggedIn', true);
                 saveTokens(response.data.access, response.data.refresh);
-                console.log(response);
+                // console.log(response);
+                navigate("/");
             })
         } catch (error) {
             toast.error("Invalid credentials. Please try again.");

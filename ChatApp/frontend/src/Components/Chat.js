@@ -125,13 +125,13 @@ export default function Chat() {
   
   useEffect(() => {
     // Initialize WebSocket connection
+    
     const chatSocket = new WebSocket(
       `ws://127.0.0.1:8000/ws/chat/${window.location.href.split("/").reverse()[0]}/`
     );
     
     chatSocket.onmessage = function (e) {
       const data = JSON.parse(e.data);
-      console.log("message");
       console.log(data);
       try {
         sound.play();
@@ -154,12 +154,11 @@ export default function Chat() {
     console.log(data)
     console.log(user)
     if (data.deleted_guy === user.username) {
-      console.log("You have been removed from the group")
       toast.error("You have been removed from the group");
       setMessages((prevMessages) => [...prevMessages, {message:   `You have been removed from the group by ${data.message.sender.username} . You will be redirected to the home page in 30 seconds`, message_type: "delete", sender: user}]);
       setTimeout(() => {
         navigator("/");
-      }, 30000);
+      }, 300);
       fetchMembers();
     }
     else{
