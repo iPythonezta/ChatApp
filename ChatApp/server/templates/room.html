@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Room</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add your custom styles here */
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            overflow-y: auto;
+            max-height: 300px; /* Set a maximum height for the message container */
+        }
+
+        .message {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 20px; /* Make the messages oval-shaped */
+            padding: 10px;
+            margin-bottom: 10px;
+            max-width: 70%; /* Limit the maximum width of the message */
+            word-wrap: break-word;
+        }
+
+        .received-message {
+            background-color: #5bc0de; /* Change the color for received messages */
+        }
+
+        .sent-message {
+            background-color: #5cb85c; /* Change the color for sent messages */
+            align-self: flex-end; /* Align sent messages to the right */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="message-container" id="chat-log">
+            <!-- Messages will be added dynamically here -->
+        </div>
+        <div class="form-group">
+            <input id="chat-message-input" type="text" class="form-control" placeholder="Type your message">
+        </div>
+        <div class="form-group">
+            <button id="chat-message-submit" class="btn btn-primary">Send</button>
+        </div>
+    </div>
+
+    {{ room_name|json_script:"room-name" }}
+
+    <script>
+        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+        );
+
+        console.log('ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/')
+
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            const chatLog = document.querySelector('#chat-log');
+            const message = data.message;
+            const className = data.sent ? 'sent-message' : 'received-message';
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', className);
+            messageDiv.textContent = message;
+            chatLog.appendChild(messageDiv);
+            chatLog.scrollTop = chatLog.scrollHeight; // Auto-scroll to the bottom
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#chat-message-input').focus();
+        document.querySelector('#chat-message-input').onkeyup = function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'message': message,
+                'sent': true,  // Mark the message as sent
+            }));
+            messageInputDom.value = '';
+        };
+    </script>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

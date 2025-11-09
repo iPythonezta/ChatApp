@@ -1,0 +1,19 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+#app-container {
+    display: flex;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Contact List Styles */
+
+#contact-list {
+    flex-basis: 30%;
+    background-color: #fff;
+}

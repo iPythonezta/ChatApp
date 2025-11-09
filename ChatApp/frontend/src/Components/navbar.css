@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.heading {
+    font-family: Anton,'sans-serif';
+}
+
+.nav-container-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bell {
+    cursor: pointer;
+    font-size: 20px;
+    margin: 0 auto;
+}
+
+.bell-container {
+    margin-right: 15px;
+}
+
+.badge {
+    margin-top: -5px;
+}
+
+.dropdown-toggle::before{
+    display: none !important;
+}
+
+.dropdown-menu {
+    margin-top: 40px;
+    margin-right: -50px;
+    width: 400px;
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.notification-item {
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+    align-content: center;
+}
+  
+.notification-text {
+    margin: 0;
+    padding: 10px;
+    word-wrap: break-word;
+    white-space: normal;
+    cursor: pointer;
+}
+
+.notification-text:hover {
+    background-color: aliceblue;
+}
+
+.unread {
+    background-color: aliceblue;
+}
+
+.envelope {
+    cursor: pointer;
+    font-size: 20px;
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* You can add custom styles here */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .chat-container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .chat-box {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .message-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .message {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .message.sender {
+            background-color: #4CAF50;
+            color: white;
+            border-top-right-radius: 0;
+        }
+
+        .message.receiver {
+            background-color: #f1f1f1;
+            border-top-left-radius: 0;
+        }
+
+        .message-input {
+            display: flex;
+            background-color: #f9f9f9;
+            padding: 10px;
+        }
+
+        .message-input input {
+            flex: 1;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .message-input button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <title>Modern Messenger</title>
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="chat-container mt-8">
+        <div class="chat-box">
+            <div class="chat-header">
+                Modern Messenger
+            </div>
+            <div class="message-container">
+                <!-- Example Messages -->
+                <div class="message sender">
+                    Hello, how are you?
+                </div>
+                <div class="message receiver">
+                    Hi! I'm doing well, thank you.
+                </div>
+                <!-- Add more messages here -->
+            </div>
+            <div class="message-input">
+                <input type="text" placeholder="Type your message...">
+                <button>Send</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
