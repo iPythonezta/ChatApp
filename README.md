@@ -6,8 +6,8 @@ Create a group with your friends and communicate seemlessly using Echat.
 # How to Setup
 
   1. Clone the repository using  `git clone https://github.com/BloggingKIng/ChatApp.git`
-  2. Activate the virtual environment using `pipenv shell`
-  3. Install the dependencies using  `pipenv install`
+  2. Move into the chat app folder using `cd ChatApp`
+  3. Install the dependencies using  `pip install -r requirements.txt`
   4. Start the server using `python manage.py runserver`
   5. Go to **http://127.0.0.1:8000**.
   6. Signup for an account, And start chatting
